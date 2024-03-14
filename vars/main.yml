@@ -1,0 +1,4 @@
+---
+# vars file for apache2-role
+http_host: iamable.target2
+http_conf: iamable.target2.conf

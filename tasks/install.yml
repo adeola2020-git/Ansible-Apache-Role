@@ -1,0 +1,7 @@
+---
+- name: Install latest version of Apache
+  apt:
+    name: apache2
+    update_cache: yes
+    state: present
+  notify: start-apache #will call handler task of the same name

@@ -1,0 +1,24 @@
+---
+- name: Create document root for domain configured in host variable
+  file:
+    path: "/var/www/{{ http_host }}"
+    state: directory
+    owner: target2
+    group: target2
+    mode: '0755'
+
+- name: Set up virtual host
+  template:
+    src: "/templates/apacheconf.j2"
+    dest: "/etc/apache2/sites-available/{{ http.conf }}"
+
+- name: Enable site
+  command: a2ensite {{ http_conf }}
+  notify: restart-apache
+
+- name: "Firewall rule to allow HTTP traffic on port {{ http_port }}"
+  ufw:
+    rule: allow
+    port: "{{ http_port }}"
+    proto: tcp
+

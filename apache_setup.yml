@@ -1,0 +1,6 @@
+---
+- name: Install and configure Apache on Ubuntu
+  hosts: target2
+  become: yes
+  roles:
+    - apache2-role      
